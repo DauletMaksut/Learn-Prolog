@@ -35,10 +35,6 @@ path(G, Vbegin, N, Forbidden, Path, Vend) :-
 	notcontains(Next, Forbidden), 
 	path(G, Next, N1 , [Next|Forbidden], NewPath, Vend),
 	Path = [Vbegin|NewPath].
-	
-
-last(X,[X]).
-last(X,[_|Z]) :- last(X,Z).
 
 
 % task 5 d

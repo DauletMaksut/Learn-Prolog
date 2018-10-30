@@ -26,9 +26,20 @@ allvertices([], [_]).
 allvertices([[H1,T1]|T], L) :- allvertices(T, L1), setinsertion(H1, L1, L2), setinsertion(T1, L2, L).
 % task 5 b
 connected(_,_,[]).
-connected(V0,V1,[[H,T]|Rem]) :- V0=H, V1= T; connected(V0,V1, Rem).
+connected(V0,V1,[[H,T]|Rem]) :- V0=H, V1=T; connected(V0,V1, Rem).
 % task 5 c
-% path()
+path(_, V, 1, _, [V], V).
+path(G, Vbegin, N, Forbidden, Path, Vend) :- 
+	N1 is N - 1,
+	connected(Vbegin, Next, G), 
+	notcontains(Next, Forbidden), 
+	path(G, Next, N1 , [Next|Forbidden], NewPath, Vend),
+	Path = [Vbegin|NewPath].
+	
+
+last(X,[X]).
+last(X,[_|Z]) :- last(X,Z).
+
 
 % task 5 d
 hamiltoniancircuit( G, C ) :- 

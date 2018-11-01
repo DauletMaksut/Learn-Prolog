@@ -19,3 +19,10 @@ my_length([_|L],N) :- my_length(L,N1), N is N1 + 1.
 reverse(X, L) :- reverse(X, L, []).
 reverse([], R, R).
 reverse([H|T], R, Z) :- reverse(T, R, [H|Z]).
+
+% Eliminate duplication
+compress([], []).
+compress([X], [X]).
+compress([X,X|T], Path) :- compress([X|T], Path).
+compress([X,Y|T], [X|Path]) :- X \= Y, compress([Y|T], Path).
+% compress([H|T], X) :- (notcontains(H,X), X is [H|T]); compress(T, X).
